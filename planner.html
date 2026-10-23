@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Valiance's academic planner for managing university tasks and deadlines.">
+    <title>Academic Planner | Valiance</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --dark: #171426;
+            --card: #211d32;
+            --lilac: #c5afff;
+            --orange: #ff985f;
+            --white: #ffffff;
+            --muted: #ded8eb;
+            --border: #49415f;
+            --ink: #29213d;
+            --light-bg: #f7f4ff;
+            --green: #8ee0b0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--dark);
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .container {
+            width: min(1100px, 92%);
+            margin: 0 auto;
+        }
+
+        .site-header {
+            background: #100e1c;
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 1.9rem;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--orange);
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .main-nav a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.92rem;
+            padding: 8px 11px;
+            border-radius: 8px;
+            transition: background 0.25s, color 0.25s;
+        }
+
+        .main-nav a:hover,
+        .main-nav a.active {
+            background: #302744;
+            color: var(--lilac);
+        }
+
+        .hero {
+            padding: 65px 0 40px;
+            text-align: center;
+            background:
+                radial-gradient(ellipse at top, #302744 0%, var(--dark) 70%);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            color: var(--orange);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            color: var(--white);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            line-height: 1.15;
+            margin: 0 0 18px;
+        }
+
+        h1 span {
+            color: var(--lilac);
+        }
+
+        .hero p {
+            color: var(--muted);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        main {
+            padding: 25px 0 75px;
+        }
+
+        .planner-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(240px, 0.8fr);
+            gap: 25px;
+            align-items: start;
+        }
+
+        .panel {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+        }
+
+        .panel h2 {
+            color: var(--white);
+            font-size: 1.4rem;
+            margin: 0 0 8px;
+        }
+
+        .panel-intro {
+            color: var(--muted);
+            font-size: 0.94rem;
+            margin: 0 0 22px;
+        }
+
+        .task-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .task-form input {
+            flex: 1;
+            min-width: 0;
+            background: #171426;
+            color: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px;
+            font: inherit;
+            outline: none;
+        }
+
+        .task-form input::placeholder {
+            color: #aaa2bd;
+        }
+
+        .task-form input:focus {
+            border-color: var(--lilac);
+            box-shadow: 0 0 0 3px rgba(197, 175, 255, 0.12);
+        }
+
+        button {
+            font: inherit;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.2s, opacity 0.2s, background 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+        }
+
+        button:focus-visible,
+        a:focus-visible,
+        input:focus-visible {
+            outline: 2px solid var(--orange);
+            outline-offset: 3px;
+        }
+
+        .add-button {
+            background: var(--lilac);
+            color: var(--ink);
+            padding: 12px 18px;
+            font-weight: 700;
+        }
+
+        .add-button:hover {
+            background: #d8caff;
+        }
+
+        .task-summary {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            color: var(--muted);
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .task-summary strong {
+            color: var(--lilac);
+        }
+
+        .task-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: #191627;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            animation: appear 0.25s ease;
+        }
+
+        .task-check {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            accent-color: var(--lilac);
+            cursor: pointer;
+        }
+
+        .task-text {
+            flex: 1;
+            min-width: 0;
+            overflow-wrap: anywhere;
+            color: var(--white);
+        }
+
+        .task-item.completed .task-text {
+            color: #aaa2bd;
+            text-decoration: line-through;
+        }
+
+        .delete-button {
+            background: #3a2330;
+            color: #ffb2bd;
+            padding: 8px 10px;
+            font-size: 0.83rem;
+            flex-shrink: 0;
+        }
+
+        .delete-button:hover {
+            background: #51303e;
+        }
+
+        .empty-state {
+            padding: 30px 12px;
+            text-align: center;
+            color: var(--muted);
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+        }
+
+        .empty-state .empty-icon {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .side-panel {
+            display: grid;
+            gap: 20px;
+        }
+
+        .progress-number {
+            color: var(--lilac);
+            font-size: 2.6rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin: 12px 0 6px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 9px;
+            background: #100e1c;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 18px 0 12px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--lilac), var(--orange));
+            border-radius: inherit;
+            transition: width 0.3s ease;
+        }
+
+        .progress-caption {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .tip-card {
+            background: #302744;
+            border-color: #5a4a79;
+        }
+
+        .tip-card h2 {
+            color: var(--lilac);
+        }
+
+        .tip-card p {
+            color: var(--muted);
+            margin-bottom: 0;
+        }
+
+        .tip-mark {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .planner-note {
+            color: var(--muted);
+            text-align: center;
+            font-size: 0.85rem;
+            margin: 25px auto 0;
+            max-width: 650px;
+        }
+
+        .site-footer {
+            background: #100e1c;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 24px 15px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .site-footer p {
+            margin: 5px 0;
+        }
+
+        .site-footer a {
+            color: var(--lilac);
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            color: var(--orange);
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 760px) {
+            .planner-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 45px 0 30px;
+            }
+
+            .panel {
+                padding: 22px;
+            }
+
+            .site-header .container {
+                justify-content: center;
+            }
+
+            .main-nav {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-nav {
+                gap: 4px;
+            }
+
+            .main-nav a {
+                font-size: 0.83rem;
+                padding: 7px 8px;
+            }
+
+            .task-form {
+                flex-direction: column;
+            }
+
+            .add-button {
+                width: 100%;
+                padding: 13px;
+            }
+
+            .task-item {
+                padding: 12px 10px;
+                gap: 9px;
+            }
+
+            .delete-button {
+                padding: 8px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a class="logo" href="index.html" aria-label="Valiance home">
+                Valiance<span>.</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Me</a>
+                <a href="projects.html">Projects</a>
+                <a href="planner.html" class="active" aria-current="page">Academic Planner</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <span class="eyebrow">Plan · Focus · Achieve</span>
+            <h1>Your Academic <span>Planner.</span></h1>
+            <p>
+                University life gets busy. Keep track of assignments, study
+                sessions and important academic tasks in one simple space.
+            </p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="planner-layout">
+            <section class="panel" aria-labelledby="tasks-heading">
+                <h2 id="tasks-heading">My Task List</h2>
+                <p class="panel-intro">
+                    Add a task, tick it off when it is done, or remove it when
+                    you no longer need it.
+                </p>
+
+                <form class="task-form" id="taskForm">
+                    <input
+                        type="text"
+                        id="taskInput"
+                        placeholder="e.g. Complete COS 106 assignment"
+                        aria-label="New academic task"
+                        maxlength="200"
+                        required
+                    >
+                    <button class="add-button" type="submit">+ Add Task</button>
+                </form>
+
+                <div class="task-summary" aria-live="polite">
+                    <span>Total tasks: <strong id="totalTasks">0</strong></span>
+                    <span>Remaining: <strong id="remainingTasks">0</strong></span>
+                    <span>Completed: <strong id="completedTasks">0</strong></span>
+                </div>
+
+                <div class="task-list" id="taskList" aria-live="polite">
+                    <div class="empty-state">
+                        <span class="empty-icon">✦</span>
+                        <strong>Your planner is ready.</strong>
+                        <p>Add your first academic task above.</p>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="side-panel">
+                <section class="panel" aria-labelledby="progress-heading">
+                    <h2 id="progress-heading">Your Progress</h2>
+                    <div class="progress-number" id="progressNumber">0%</div>
+                    <p class="progress-caption">of your tasks completed</p>
+
+                    <div
+                        class="progress-track"
+                        id="progressTrack"
+                        role="progressbar"
+                        aria-label="Task completion progress"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                    >
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+
+                    <p class="progress-caption" id="progressMessage">
+                        Every small step counts. Start with one task.
+                    </p>
+                </section>
+
+                <section class="panel tip-card">
+                    <div class="tip-mark" aria-hidden="true">✧</div>
+                    <h2>Valiance's Study Tip</h2>
+                    <p>
+                        Break a big assignment into smaller tasks. Give each
+                        step your attention, and celebrate your progress as
+                        you go.
+                    </p>
+                </section>
+            </aside>
+        </div>
+
+        <p class="planner-note">
+            Your tasks are saved in this browser on this device using local
+            storage. They are not synced across devices.
+        </p>
+    </main>
+
+    <footer class="site-footer">
+        <p><strong>Valiance.</strong> Connecting data, business, and technology.</p>
+        <p>
+            <a href="index.html">Home</a> ·
+            <a href="projects.html">Projects</a> ·
+            <a href="contact.html">Contact</a>
+        </p>
+        <p>&copy; 2026 Valiance.</p>
+    </footer>
+
+    <script>
+        const STORAGE_KEY = "valianceTasks";
+
+        const taskForm = document.getElementById("taskForm");
+        const taskInput = document.getElementById("taskInput");
+        const taskList = document.getElementById("taskList");
+
+        const totalTasksElement = document.getElementById("totalTasks");
+        const remainingTasksElement = document.getElementById("remainingTasks");
+        const completedTasksElement = document.getElementById("completedTasks");
+
+        const progressNumber = document.getElementById("progressNumber");
+        const progressFill = document.getElementById("progressFill");
+        const progressTrack = document.getElementById("progressTrack");
+        const progressMessage = document.getElementById("progressMessage");
+
+        let tasks = loadTasks();
+
+        function loadTasks() {
+            try {
+                const savedTasks = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+                if (!Array.isArray(savedTasks)) {
+                    return [];
+                }
+
+                return savedTasks
+                    .filter(task =>
+                        task &&
+                        typeof task.text === "string"
+                    )
+                    .map((task, index) => ({
+                        id: task.id ?? (Date.now() + index),
+                        text: task.text,
+                        completed: Boolean(task.completed)
+                    }));
+            } catch (error) {
+                console.error("Could not load saved tasks:", error);
+                return [];
+            }
+        }
+
+        function saveTasks() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+            } catch (error) {
+                console.error("Could not save tasks:", error);
+                alert("Your tasks could not be saved by this browser.");
+            }
+        }
+
+        function renderTasks() {
+            taskList.replaceChildren();
+
+            if (tasks.length === 0) {
+                const emptyState = document.createElement("div");
+                emptyState.className = "empty-state";
+
+                const icon = document.createElement("span");
+                icon.className = "empty-icon";
+                icon.textContent = "✦";
+
+                const title = document.createElement("strong");
+                title.textContent = "Your planner is ready.";
+
+                const message = document.createElement("p");
+                message.textContent = "Add your first academic task above.";
+
+                emptyState.append(icon, title, message);
+                taskList.appendChild(emptyState);
+            } else {
+                tasks.forEach(task => {
+                    const item = document.createElement("div");
+                    item.className = "task-item";
+
+                    if (task.completed) {
+                        item.classList.add("completed");
+                    }
+
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.className = "task-check";
+                    checkbox.checked = task.completed;
+                    checkbox.setAttribute(
+                        "aria-label",
+                        "Mark task as " + (task.completed ? "incomplete" : "complete")
+                    );
+
+                    checkbox.addEventListener("change", () => {
+                        toggleTask(task.id);
+                    });
+
+                    const text = document.createElement("span");
+                    text.className = "task-text";
+                    text.textContent = task.text;
+
+                    const deleteButton = document.createElement("button");
+                    deleteButton.type = "button";
+                    deleteButton.className = "delete-button";
+                    deleteButton.textContent = "Delete";
+                    deleteButton.setAttribute(
+                        "aria-label",
+                        "Delete task: " + task.text
+                    );
+
+                    deleteButton.addEventListener("click", () => {
+                        deleteTask(task.id);
+                    });
+
+                    item.append(checkbox, text, deleteButton);
+                    taskList.appendChild(item);
+                });
+            }
+
+            updateProgress();
+        }
+
+        function addTask(text) {
+            const newTask = {
+                id: Date.now() + Math.random(),
+                text: text,
+                completed: false
+            };
+
+            tasks.push(newTask);
+            saveTasks();
+            renderTasks();
+        }
+
+        function toggleTask(taskId) {
+            tasks = tasks.map(task => {
+                if (task.id === taskId) {
+                    return {
+                        ...task,
+                        completed: !task.completed
+                    };
+                }
+
+                return task;
+            });
+
+            saveTasks();
+            renderTasks();
+        }
+
+        function deleteTask(taskId) {
+            tasks = tasks.filter(task => task.id !== taskId);
+            saveTasks();
+            renderTasks();
+        }
+
+        function updateProgress() {
+            const total = tasks.length;
+            const completed = tasks.filter(task => task.completed).length;
+            const remaining = total - completed;
+
+            const percentage = total === 0
+                ? 0
+                : Math.round((completed / total) * 100);
+
+            totalTasksElement.textContent = total;
+            remainingTasksElement.textContent = remaining;
+            completedTasksElement.textContent = completed;
+
+            progressNumber.textContent = percentage + "%";
+            progressFill.style.width = percentage + "%";
+            progressTrack.setAttribute("aria-valuenow", percentage);
+
+            if (total === 0) {
+                progressMessage.textContent =
+                    "Every small step counts. Start with one task.";
+            } else if (percentage === 100) {
+                progressMessage.textContent =
+                    "Excellent work! You have completed every task.";
+            } else if (percentage >= 50) {
+                progressMessage.textContent =
+                    "Great progress. Keep going — you are getting there!";
+            } else {
+                progressMessage.textContent =
+                    "One task at a time. You can do this!";
+            }
+        }
+
+        taskForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const taskText = taskInput.value.trim();
+
+            if (taskText === "") {
+                alert("Please enter a task before adding it.");
+                taskInput.focus();
+                return;
+            }
+
+            addTask(taskText);
+            taskInput.value = "";
+            taskInput.focus();
+        });
+
+        renderTasks();
+    </script>
+</body>
+</html>

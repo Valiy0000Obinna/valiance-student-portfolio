@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Learn about Valiance, a Data Science student interested in analytics, business and technology.">
+
+    <title>About Me | Valiance</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* =====================================
+           ABOUT PAGE: COLOUR AND READABILITY
+        ===================================== */
+
+        :root {
+            --about-dark: #171426;
+            --about-card: #211d32;
+            --about-lilac: #c5afff;
+            --about-orange: #ff985f;
+            --about-white: #ffffff;
+            --about-muted: #d8d3e5;
+            --about-border: #49415f;
+            --about-light-bg: #f7f4ff;
+            --about-light-text: #29213d;
+        }
+
+        body {
+            color: var(--about-light-text);
+        }
+
+        /* HEADER AND LOGO */
+
+        .site-header {
+            background: var(--about-dark);
+            border-bottom: 1px solid var(--about-border);
+        }
+
+        .site-header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .site-header .logo {
+            display: inline-block;
+            flex-shrink: 0;
+            color: var(--about-white);
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            text-decoration: none;
+        }
+
+        .site-header .logo span {
+            color: var(--about-orange);
+        }
+
+        .main-nav a {
+            color: #eee9f8;
+            text-decoration: none;
+        }
+
+        .main-nav a:hover,
+        .main-nav a.active {
+            color: var(--about-lilac);
+        }
+
+        .main-nav a:focus-visible,
+        .site-header .logo:focus-visible,
+        .about-page a:focus-visible {
+            outline: 3px solid var(--about-orange);
+            outline-offset: 4px;
+        }
+
+        /* GENERAL PAGE */
+
+        .about-page {
+            padding-top: 28px;
+            padding-bottom: 48px;
+        }
+
+        .about-page p,
+        .about-page li {
+            line-height: 1.8;
+        }
+
+        .about-page h1,
+        .about-page h2,
+        .about-page h3 {
+            line-height: 1.3;
+        }
+
+        .about-page section {
+            scroll-margin-top: 24px;
+        }
+
+        /* INTRODUCTION */
+
+        .about-hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.3fr) minmax(200px, 0.7fr);
+            align-items: center;
+            gap: 34px;
+            padding: clamp(24px, 5vw, 46px);
+            margin-bottom: 34px;
+            color: var(--about-white);
+            background:
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(197, 175, 255, 0.2),
+                    transparent 38%
+                ),
+                var(--about-dark);
+            border: 1px solid var(--about-border);
+            border-radius: 20px;
+        }
+
+        .about-hero h1 {
+            margin: 12px 0 18px;
+            color: var(--about-white);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            letter-spacing: -1px;
+        }
+
+        .about-hero h1 span {
+            color: var(--about-lilac);
+        }
+
+        .about-hero p {
+            color: var(--about-muted);
+        }
+
+        .about-hero .section-kicker {
+            color: var(--about-orange);
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .about-hero .about-summary {
+            max-width: 600px;
+        }
+
+        .about-photo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-photo img {
+            display: block;
+            width: 100%;
+            max-width: 260px;
+            height: 290px;
+            margin: 0;
+            object-fit: cover;
+            object-position: center;
+            border: 4px solid var(--about-lilac);
+            border-radius: 48% 48% 18px 18px;
+            box-shadow: 12px 12px 0 rgba(255, 152, 95, 0.24);
+        }
+
+        .about-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 20px;
+        }
+
+        .about-tags span {
+            display: inline-block;
+            padding: 7px 12px;
+            color: #f5efff;
+            background: #302744;
+            border: 1px solid #62517f;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        /* SECTION HEADINGS */
+
+        .about-section {
+            margin-top: 38px;
+        }
+
+        .about-section-heading {
+            margin-bottom: 20px;
+        }
+
+        .about-section-heading .section-kicker {
+            margin-bottom: 7px;
+            color: #8650c9;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+
+        .about-section-heading h2 {
+            margin: 7px 0 10px;
+            color: #211932;
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+        }
+
+        .about-section-heading > p:not(.section-kicker) {
+            max-width: 720px;
+            color: #514962;
+        }
+
+        /* CARDS */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .about-card {
+            min-width: 0;
+            padding: 24px;
+            color: #f6f2ff;
+            background: var(--about-card);
+            border: 1px solid var(--about-border);
+            border-radius: 16px;
+            transition: transform 0.2s ease,
+                        border-color 0.2s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--about-lilac);
+        }
+
+        .about-card h3 {
+            margin: 0 0 12px;
+            color: var(--about-white);
+            font-size: 1.12rem;
+        }
+
+        .about-card p,
+        .about-card li {
+            color: #e2dced;
+        }
+
+        .about-card p {
+            margin: 0;
+        }
+
+        .about-card p + p {
+            margin-top: 10px;
+        }
+
+        .about-card strong {
+            color: var(--about-white);
+        }
+
+        .about-card .card-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            margin-bottom: 15px;
+            color: var(--about-lilac);
+            background: #352b49;
+            border: 1px solid #514365;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .about-card.about-highlight {
+            border-left: 4px solid var(--about-orange);
+        }
+
+        .about-wide {
+            grid-column: 1 / -1;
+        }
+
+        .about-list {
+            margin: 12px 0 0;
+            padding-left: 22px;
+        }
+
+        .about-list li {
+            margin-bottom: 8px;
+        }
+
+        .about-project-link {
+            display: inline-block;
+            margin-top: 16px;
+            color: var(--about-lilac);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .about-project-link:hover {
+            color: var(--about-orange);
+            text-decoration: underline;
+        }
+
+        /* FUTURE GOALS */
+
+        .about-ending {
+            margin-top: 38px;
+            padding: clamp(25px, 4vw, 38px);
+            color: var(--about-white);
+            background:
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(255, 152, 95, 0.17),
+                    transparent 38%
+                ),
+                var(--about-dark);
+            border: 1px solid var(--about-border);
+            border-radius: 20px;
+        }
+
+        .about-ending .section-kicker {
+            color: var(--about-orange);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+
+        .about-ending h2 {
+            margin: 10px 0;
+            color: var(--about-white);
+            font-size: clamp(1.7rem, 4vw, 2.3rem);
+        }
+
+        .about-ending p {
+            max-width: 760px;
+            color: var(--about-muted);
+        }
+
+        .about-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .about-actions a {
+            display: inline-block;
+            padding: 12px 19px;
+            color: var(--about-white);
+            background: #302744;
+            border: 1px solid #74638f;
+            border-radius: 9px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.2s ease,
+                        transform 0.2s ease;
+        }
+
+        .about-actions a.primary-button {
+            color: #211426;
+            background: var(--about-orange);
+            border-color: var(--about-orange);
+        }
+
+        .about-actions a:hover {
+            transform: translateY(-2px);
+            background: #443558;
+        }
+
+        .about-actions a.primary-button:hover {
+            background: #ffb083;
+        }
+
+        /* FOOTER */
+
+        .site-footer {
+            padding: 22px 0;
+            color: #e4dff0;
+            background: var(--about-dark);
+            border-top: 1px solid var(--about-border);
+        }
+
+        .site-footer p {
+            margin: 0;
+            color: #e4dff0;
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+            .site-header .container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .site-header .logo {
+                font-size: 2rem;
+            }
+
+            .main-nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px 15px;
+                width: 100%;
+            }
+
+            .main-nav a {
+                font-size: 0.92rem;
+            }
+
+            .about-page {
+                padding-top: 18px;
+            }
+
+            .about-hero {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 24px;
+                padding: 24px 20px;
+            }
+
+            .about-hero h1 {
+                font-size: clamp(2.2rem, 9vw, 2.8rem);
+            }
+
+            .about-photo img {
+                max-width: 210px;
+                height: 235px;
+            }
+
+            .about-section {
+                margin-top: 30px;
+            }
+
+            .about-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 13px;
+            }
+
+            .about-wide {
+                grid-column: auto;
+            }
+
+            .about-card {
+                padding: 20px;
+            }
+
+            .about-ending {
+                margin-top: 30px;
+                padding: 25px 20px;
+            }
+
+            .about-actions {
+                flex-direction: column;
+            }
+
+            .about-actions a {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .about-card,
+            .about-actions a {
+                transition: none;
+            }
+
+            .about-card:hover,
+            .about-actions a:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a class="logo" href="index.html" aria-label="Valiance home">
+                Valiance<span>.</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active" aria-current="page">
+                    About Me
+                </a>
+                <a href="projects.html">Projects</a>
+                <a href="planner.html">Academic Planner</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container about-page">
+
+        <section class="about-hero">
+            <div>
+                <p class="section-kicker">A little about me</p>
+
+                <h1>Hi, I'm <span>Valiance.</span></h1>
+
+                <p class="about-summary">
+                    I'm Obinna Valiance Chukwuemeka, a Data Science student
+                    interested in how data, business, and technology connect.
+                    I enjoy exploring information, finding patterns, and
+                    turning what I discover into useful insights.
+                </p>
+
+                <div class="about-tags">
+                    <span>Data Science Student</span>
+                    <span>Analytics</span>
+                    <span>Technology</span>
+                    <span>Always Learning</span>
+                </div>
+            </div>
+
+            <div class="about-photo">
+                <img src="images/profile.jpeg"
+                     alt="Portrait of Obinna Valiance Chukwuemeka">
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-section-heading">
+                <p class="section-kicker">01 / My journey</p>
+                <h2>From curiosity to data</h2>
+                <p>
+                    My interest in technology grew from wanting to understand
+                    what we can create and discover with it.
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <article class="about-card about-highlight">
+                    <div class="card-mark">01</div>
+                    <h3>Why Data?</h3>
+                    <p>
+                        I enjoy working with numbers and investigating the
+                        details behind them. Football analysis also interests
+                        me because statistics, tactics, and evidence can help
+                        explain why teams perform the way they do.
+                    </p>
+                </article>
+
+                <article class="about-card">
+                    <div class="card-mark">02</div>
+                    <h3>Beyond the Classroom</h3>
+                    <p>
+                        My experience as a secretary in a real estate company
+                        has helped me develop organisational, communication,
+                        record-keeping, and administrative skills. It has also
+                        shown me how important accurate information is in
+                        everyday business activities.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-section-heading">
+                <p class="section-kicker">02 / Education</p>
+                <h2>Building my foundation</h2>
+            </div>
+
+            <div class="about-grid">
+                <article class="about-card about-wide">
+                    <div class="card-mark">ED</div>
+                    <h3>BSc Data Science</h3>
+                    <p><strong>MIVA Open University</strong></p>
+                    <p>May 2026 – Present</p>
+                    <p>
+                        Developing my understanding of data, analytical
+                        thinking, and the technologies used to turn information
+                        into meaningful insights.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-section-heading">
+                <p class="section-kicker">03 / What I work with</p>
+                <h2>Skills I'm developing</h2>
+                <p>
+                    A growing toolkit for exploring data, communicating
+                    findings, and solving practical problems.
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <article class="about-card">
+                    <div class="card-mark">Py</div>
+                    <h3>Python</h3>
+                    <p>
+                        Intermediate knowledge, with an interest in using
+                        Python for data exploration and analysis.
+                    </p>
+                </article>
+
+                <article class="about-card">
+                    <div class="card-mark">SQL</div>
+                    <h3>SQL</h3>
+                    <p>
+                        Working with structured data and querying information
+                        to investigate questions and uncover insights.
+                    </p>
+                </article>
+
+                <article class="about-card">
+                    <div class="card-mark">Ex</div>
+                    <h3>Excel</h3>
+                    <p>
+                        Organising information, working with spreadsheets,
+                        analysing data, and building dashboards.
+                    </p>
+                </article>
+
+                <article class="about-card">
+                    <div class="card-mark">BI</div>
+                    <h3>Power BI</h3>
+                    <p>
+                        Creating dashboards that communicate business
+                        performance and help people explore key metrics.
+                    </p>
+                </article>
+
+                <article class="about-card">
+                    <div class="card-mark">DA</div>
+                    <h3>Data Analysis</h3>
+                    <p>
+                        Researching questions, interpreting results, identifying
+                        patterns, and presenting findings clearly.
+                    </p>
+                </article>
+
+                <article class="about-card">
+                    <div class="card-mark">Co</div>
+                    <h3>Communication & Organisation</h3>
+                    <p>
+                        Administrative experience, record keeping,
+                        coordinating activities, and communicating information.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-section-heading">
+                <p class="section-kicker">04 / Learning by doing</p>
+                <h2>Projects that tell my story</h2>
+                <p>
+                    I enjoy applying what I learn to practical analysis and
+                    visualisation projects.
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <article class="about-card">
+                    <div class="card-mark">01</div>
+                    <h3>AdventureWorks Sales Dashboard</h3>
+                    <p>
+                        A Power BI project exploring sales performance,
+                        revenue, gross margin, products, and territories
+                        through key performance indicators and visual reports.
+                    </p>
+                    <a class="about-project-link" href="projects.html">
+                        Explore my projects →
+                    </a>
+                </article>
+
+                <article class="about-card">
+                    <div class="card-mark">02</div>
+                    <h3>TDI Hospital Analysis Capstone</h3>
+                    <p>
+                        A data analysis capstone involving SQL, Excel,
+                        dashboard development, research, and presentation
+                        of findings and recommendations.
+                    </p>
+                    <a class="about-project-link" href="projects.html">
+                        Explore my projects →
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-section-heading">
+                <p class="section-kicker">05 / Professional growth</p>
+                <h2>Experience & learning</h2>
+                <p>
+                    I've been building practical experience while continuing
+                    my education.
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <article class="about-card">
+                    <div class="card-mark">EX</div>
+                    <h3>Internship Experience</h3>
+                    <ul class="about-list">
+                        <li>Excelerate — Data Visualization Intern</li>
+                        <li>NSDIC — Data Analyst Intern</li>
+                        <li>Cognorise Infotech — Data Analyst Intern</li>
+                    </ul>
+                </article>
+
+                <article class="about-card">
+                    <div class="card-mark">LE</div>
+                    <h3>Additional Learning</h3>
+                    <ul class="about-list">
+                        <li>LearnwithWida — Data Analysis Mentorship</li>
+                        <li>Axia — Data Analysis Certificate</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-section-heading">
+                <p class="section-kicker">06 / Outside the numbers</p>
+                <h2>What keeps me curious</h2>
+            </div>
+
+            <div class="about-grid">
+                <article class="about-card">
+                    <div class="card-mark">FB</div>
+                    <h3>Football & Tactics</h3>
+                    <p>
+                        I enjoy following football and exploring the analysis,
+                        statistics, and tactical decisions behind the game.
+                    </p>
+                </article>
+
+                <article class="about-card">
+                    <div class="card-mark">AI</div>
+                    <h3>AI & Technology</h3>
+                    <p>
+                        I'm fascinated by intelligent systems and the
+                        possibilities that emerge when data and technology
+                        work together.
+                    </p>
+                </article>
+
+                <article class="about-card">
+                    <div class="card-mark">R</div>
+                    <h3>Research & Reading</h3>
+                    <p>
+                        I like exploring unfamiliar topics, asking questions,
+                        and learning how things work.
+                    </p>
+                </article>
+
+                <article class="about-card">
+                    <div class="card-mark">G</div>
+                    <h3>Gaming & Creativity</h3>
+                    <p>
+                        Gaming and creative technology give me another way
+                        to explore ideas, systems, and problem-solving.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="about-ending">
+            <p class="section-kicker">07 / Looking ahead</p>
+            <h2>Curious about what's possible.</h2>
+
+            <p>
+                My immediate goal is to keep strengthening my data analysis
+                skills and building useful projects. Over time, I want to
+                explore deeper areas of data science and artificial
+                intelligence. Inspired by ideas like JARVIS from Iron Man,
+                I'm curious about how intelligent technology could help people
+                solve real problems, including challenges involving nature
+                and the environment.
+            </p>
+
+            <div class="about-actions">
+                <a class="primary-button" href="projects.html">
+                    View My Projects
+                </a>
+                <a href="contact.html">
+                    Get In Touch
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>
+                © 2026 Valiance.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

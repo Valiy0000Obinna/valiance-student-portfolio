@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Explore Valiance's data analytics, Power BI, SQL and Excel projects.">
+
+    <title>Projects | Valiance</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --project-dark: #171426;
+            --project-card: #211d32;
+            --project-lilac: #c5afff;
+            --project-orange: #ff985f;
+            --project-white: #ffffff;
+            --project-muted: #ded8eb;
+            --project-border: #49415f;
+            --project-ink: #29213d;
+        }
+
+        /* HEADER */
+
+        .site-header {
+            background: var(--project-dark);
+            border-bottom: 1px solid var(--project-border);
+        }
+
+        .site-header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .site-header .logo {
+            flex-shrink: 0;
+            color: var(--project-white);
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            text-decoration: none;
+        }
+
+        .site-header .logo span {
+            color: var(--project-orange);
+        }
+
+        .main-nav a {
+            color: #eee9f8;
+            text-decoration: none;
+        }
+
+        .main-nav a:hover,
+        .main-nav a.active {
+            color: var(--project-lilac);
+        }
+
+        /* PAGE INTRO */
+
+        .projects-page {
+            padding-top: 28px;
+            padding-bottom: 48px;
+        }
+
+        .projects-hero {
+            position: relative;
+            overflow: hidden;
+            padding: clamp(28px, 5vw, 48px);
+            color: var(--project-white);
+            background:
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(197, 175, 255, 0.19),
+                    transparent 38%
+                ),
+                var(--project-dark);
+            border: 1px solid var(--project-border);
+            border-radius: 20px;
+        }
+
+        .projects-hero .section-kicker {
+            color: var(--project-orange);
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .projects-hero h1 {
+            max-width: 760px;
+            margin: 12px 0;
+            color: var(--project-white);
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+
+        .projects-hero h1 span {
+            color: var(--project-lilac);
+        }
+
+        .projects-hero p:not(.section-kicker) {
+            max-width: 720px;
+            color: var(--project-muted);
+            line-height: 1.8;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 20px;
+        }
+
+        .project-tags span {
+            padding: 7px 12px;
+            color: #f5efff;
+            background: #302744;
+            border: 1px solid #62517f;
+            border-radius: 30px;
+            font-size: 0.83rem;
+            font-weight: 600;
+        }
+
+        /* PROJECT SECTION */
+
+        .projects-section {
+            margin-top: 36px;
+        }
+
+        .projects-section-heading {
+            margin-bottom: 20px;
+        }
+
+        .projects-section-heading .section-kicker {
+            color: #8650c9;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+
+        .projects-section-heading h2 {
+            margin: 8px 0;
+            color: var(--project-ink);
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+        }
+
+        .projects-section-heading p {
+            max-width: 720px;
+            color: #514962;
+            line-height: 1.8;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            overflow: hidden;
+            color: var(--project-white);
+            background: var(--project-card);
+            border: 1px solid var(--project-border);
+            border-radius: 17px;
+            transition: transform 0.2s ease,
+                        border-color 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--project-lilac);
+        }
+
+        .project-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 190px;
+            padding: 14px;
+            background: #302744;
+            border-bottom: 1px solid var(--project-border);
+        }
+
+        .project-image img {
+            display: block;
+            width: 100%;
+            max-height: 270px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .project-image .image-placeholder {
+            color: var(--project-lilac);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .project-content {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 24px;
+        }
+
+        .project-number {
+            margin-bottom: 10px;
+            color: var(--project-orange);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .project-content h3 {
+            margin: 0 0 12px;
+            color: var(--project-white);
+            font-size: 1.3rem;
+            line-height: 1.4;
+        }
+
+        .project-content p {
+            color: var(--project-muted);
+            line-height: 1.8;
+        }
+
+        .project-content h4 {
+            margin: 15px 0 7px;
+            color: var(--project-lilac);
+            font-size: 0.95rem;
+        }
+
+        .project-list {
+            margin: 6px 0 16px;
+            padding-left: 20px;
+            color: var(--project-muted);
+            line-height: 1.8;
+        }
+
+        .project-list li {
+            margin-bottom: 5px;
+        }
+
+        .project-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 8px 0 20px;
+        }
+
+        .project-skills span {
+            padding: 6px 10px;
+            color: #eee5ff;
+            background: #382e4d;
+            border: 1px solid #59496f;
+            border-radius: 7px;
+            font-size: 0.78rem;
+        }
+
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 8px;
+        }
+
+        .project-button {
+            display: inline-block;
+            padding: 11px 15px;
+            color: var(--project-white);
+            background: #382e4d;
+            border: 1px solid #74638f;
+            border-radius: 9px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+
+        .project-button.primary {
+            color: #211426;
+            background: var(--project-orange);
+            border-color: var(--project-orange);
+        }
+
+        .project-button:hover {
+            background: #4a3b60;
+        }
+
+        .project-button.primary:hover {
+            background: #ffb083;
+        }
+
+        /* UPCOMING PROJECT */
+
+        .upcoming-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 25px;
+            color: var(--project-white);
+            background: var(--project-card);
+            border: 1px dashed #74638f;
+            border-radius: 16px;
+        }
+
+        .upcoming-mark {
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            color: var(--project-lilac);
+            background: #382e4d;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .upcoming-card h3 {
+            margin: 0 0 8px;
+            color: var(--project-white);
+        }
+
+        .upcoming-card p {
+            margin: 0;
+            color: var(--project-muted);
+            line-height: 1.8;
+        }
+
+        /* CLOSING SECTION */
+
+        .projects-ending {
+            margin-top: 36px;
+            padding: clamp(25px, 4vw, 38px);
+            color: var(--project-white);
+            background:
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(255, 152, 95, 0.17),
+                    transparent 38%
+                ),
+                var(--project-dark);
+            border: 1px solid var(--project-border);
+            border-radius: 20px;
+        }
+
+        .projects-ending h2 {
+            margin-top: 0;
+            color: var(--project-white);
+        }
+
+        .projects-ending p {
+            max-width: 720px;
+            color: var(--project-muted);
+            line-height: 1.8;
+        }
+
+        .projects-ending a {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 12px 18px;
+            color: #211426;
+            background: var(--project-orange);
+            border: 1px solid var(--project-orange);
+            border-radius: 9px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .projects-ending a:hover {
+            background: #ffb083;
+        }
+
+        .site-footer {
+            padding: 22px 0;
+            color: #e4dff0;
+            background: var(--project-dark);
+            border-top: 1px solid var(--project-border);
+        }
+
+        .site-footer p {
+            margin: 0;
+            color: #e4dff0;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        a:focus-visible {
+            outline: 3px solid var(--project-orange);
+            outline-offset: 4px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+            .site-header .container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .site-header .logo {
+                font-size: 2rem;
+            }
+
+            .main-nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px 15px;
+                width: 100%;
+            }
+
+            .main-nav a {
+                font-size: 0.92rem;
+            }
+
+            .projects-page {
+                padding-top: 18px;
+            }
+
+            .projects-hero {
+                padding: 25px 20px;
+            }
+
+            .projects-hero h1 {
+                font-size: clamp(2.1rem, 9vw, 2.8rem);
+            }
+
+            .projects-section {
+                margin-top: 29px;
+            }
+
+            .project-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 15px;
+            }
+
+            .project-content {
+                padding: 20px;
+            }
+
+            .project-image {
+                min-height: 150px;
+            }
+
+            .project-links {
+                width: 100%;
+            }
+
+            .project-button {
+                flex: 1 1 auto;
+            }
+
+            .upcoming-card {
+                gap: 13px;
+                padding: 20px;
+            }
+
+            .projects-ending {
+                padding: 25px 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .project-card,
+            .project-button {
+                transition: none;
+            }
+
+            .project-card:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a class="logo" href="index.html" aria-label="Valiance home">
+                Valiance<span>.</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Me</a>
+                <a href="projects.html" class="active" aria-current="page">
+                    Projects
+                </a>
+                <a href="planner.html">Academic Planner</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container projects-page">
+
+        <!-- INTRODUCTION -->
+
+        <section class="projects-hero">
+            <p class="section-kicker">My work / My learning</p>
+
+            <h1>Turning data into <span>insight.</span></h1>
+
+            <p>
+                These projects reflect my growing experience in data analysis,
+                dashboard development, and communicating findings. Each
+                project is an opportunity to practise, learn, and solve
+                problems using data.
+            </p>
+
+            <div class="project-tags">
+                <span>Power BI</span>
+                <span>SQL</span>
+                <span>Excel</span>
+                <span>Data Visualisation</span>
+            </div>
+        </section>
+
+        <!-- COMPLETED PROJECTS -->
+
+        <section class="projects-section">
+            <div class="projects-section-heading">
+                <p class="section-kicker">01 / Project portfolio</p>
+                <h2>Selected projects</h2>
+                <p>
+                    A look at the work I've completed and the analytical
+                    skills I'm continuing to develop.
+                </p>
+            </div>
+
+            <div class="project-grid">
+
+                <!-- ADVENTUREWORKS -->
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <div class="image-placeholder">
+                            AdventureWorks<br>
+                            Sales Dashboard
+                        </div>
+                    </div>
+
+                    <div class="project-content">
+                        <p class="project-number">Project 01 / Business intelligence</p>
+
+                        <h3>AdventureWorks Sales Dashboard</h3>
+
+                        <p>
+                            A Power BI dashboard analysing sales performance
+                            through revenue, gross margin, order value,
+                            quantities, products, and territories.
+                        </p>
+
+                        <h4>What I explored</h4>
+
+                        <ul class="project-list">
+                            <li>Key sales and profitability indicators.</li>
+                            <li>Year-over-year performance comparisons.</li>
+                            <li>Revenue and gross margin trends.</li>
+                            <li>Performance by sales channel and territory.</li>
+                        </ul>
+
+                        <h4>Tools used</h4>
+
+                        <div class="project-skills">
+                            <span>Power BI</span>
+                            <span>Data Analysis</span>
+                            <span>Visualisation</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-button primary"
+                               href="documents/adventureworks%20dashboard.pdf"
+                               target="_blank"
+                               rel="noopener">
+                                View Dashboard PDF ↗
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- TDI HOSPITAL -->
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="images/tdi%20hospital%20dashboard.jpg"
+                             alt="TDI Hospital Analysis dashboard"
+                             loading="lazy">
+                    </div>
+
+                    <div class="project-content">
+                        <p class="project-number">Project 02 / Healthcare analytics</p>
+
+                        <h3>TDI Hospital Analysis Capstone</h3>
+
+                        <p>
+                            A healthcare analysis capstone using SQL and Excel
+                            to explore data, build a dashboard, research
+                            findings, and present recommendations.
+                        </p>
+
+                        <h4>Project activities</h4>
+
+                        <ul class="project-list">
+                            <li>Querying and examining data using SQL.</li>
+                            <li>Analysing and visualising information in Excel.</li>
+                            <li>Preparing findings and recommendations.</li>
+                            <li>Presenting the work and reviewing feedback.</li>
+                        </ul>
+
+                        <h4>Tools used</h4>
+
+                        <div class="project-skills">
+                            <span>SQL</span>
+                            <span>Excel</span>
+                            <span>Research</span>
+                            <span>Presentation</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-button primary"
+                               href="images/tdi%20hospital%20dashboard.jpg"
+                               target="_blank"
+                               rel="noopener">
+                                View Dashboard Image ↗
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- UPCOMING WORK -->
+
+        <section class="projects-section">
+            <div class="projects-section-heading">
+                <p class="section-kicker">02 / What's next</p>
+                <h2>More projects are in progress</h2>
+                <p>
+                    I'm continuing to practise and build projects that show
+                    my growth in data analytics and data science.
+                </p>
+            </div>
+
+            <article class="upcoming-card">
+                <div class="upcoming-mark">+</div>
+
+                <div>
+                    <h3>Next analytics project</h3>
+                    <p>
+                        An upcoming project focused on applying data analysis
+                        and visualisation to a new problem. Details and results
+                        will be added here when the project is ready.
+                    </p>
+                </div>
+            </article>
+        </section>
+
+        <!-- CONTACT -->
+
+        <section class="projects-ending">
+            <h2>Interested in my work?</h2>
+
+            <p>
+                I'm always learning, exploring ideas, and looking for
+                opportunities to grow through practical projects and
+                collaboration.
+            </p>
+
+            <a href="contact.html">Get in Touch →</a>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>
+                © 2026 Valiance.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
