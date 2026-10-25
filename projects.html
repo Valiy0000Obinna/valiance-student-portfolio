@@ -193,7 +193,7 @@
         .project-image img {
             display: block;
             width: 100%;
-            max-height: 270px;
+            max-height: 300px;
             object-fit: contain;
             border-radius: 8px;
         }
@@ -301,44 +301,6 @@
 
         .project-button.primary:hover {
             background: #ffb083;
-        }
-
-        /* UPCOMING PROJECT */
-
-        .upcoming-card {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 25px;
-            color: var(--project-white);
-            background: var(--project-card);
-            border: 1px dashed #74638f;
-            border-radius: 16px;
-        }
-
-        .upcoming-mark {
-            display: flex;
-            flex-shrink: 0;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            color: var(--project-lilac);
-            background: #382e4d;
-            border-radius: 12px;
-            font-size: 1.3rem;
-            font-weight: 800;
-        }
-
-        .upcoming-card h3 {
-            margin: 0 0 8px;
-            color: var(--project-white);
-        }
-
-        .upcoming-card p {
-            margin: 0;
-            color: var(--project-muted);
-            line-height: 1.8;
         }
 
         /* CLOSING SECTION */
@@ -465,11 +427,6 @@
                 flex: 1 1 auto;
             }
 
-            .upcoming-card {
-                gap: 13px;
-                padding: 20px;
-            }
-
             .projects-ending {
                 padding: 25px 20px;
             }
@@ -546,7 +503,7 @@
 
             <div class="project-grid">
 
-                <!-- ADVENTUREWORKS -->
+                <!-- PROJECT 01: ADVENTUREWORKS -->
 
                 <article class="project-card">
                     <div class="project-image">
@@ -588,14 +545,14 @@
                             <a class="project-button primary"
                                href="documents/adventureworks%20dashboard.pdf"
                                target="_blank"
-                               rel="noopener">
+                               rel="noopener noreferrer">
                                 View Dashboard PDF ↗
                             </a>
                         </div>
                     </div>
                 </article>
 
-                <!-- TDI HOSPITAL -->
+                <!-- PROJECT 02: TDI HOSPITAL -->
 
                 <article class="project-card">
                     <div class="project-image">
@@ -637,7 +594,57 @@
                             <a class="project-button primary"
                                href="images/tdi%20hospital%20dashboard.jpg"
                                target="_blank"
-                               rel="noopener">
+                               rel="noopener noreferrer">
+                                View Dashboard Image ↗
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROJECT 03: FINTECH FRAUD DASHBOARD -->
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="images/Fintech%20Fraud%20Dashboard.jpg"
+                             alt="Fintech Fraud Dashboard created in Power BI"
+                             loading="lazy">
+                    </div>
+
+                    <div class="project-content">
+                        <p class="project-number">Project 03 / Fintech risk analytics</p>
+
+                        <h3>Fintech Fraud Intelligence Dashboard</h3>
+
+                        <p>
+                            A Power BI dashboard designed to monitor financial
+                            transaction activity and explore fraud patterns,
+                            transaction performance, and potential risk areas.
+                        </p>
+
+                        <h4>What I explored</h4>
+
+                        <ul class="project-list">
+                            <li>Total transaction value and active transacting customers.</li>
+                            <li>Transaction success rate and fraud incidence rate.</li>
+                            <li>Transaction volume and fraud incidence trends.</li>
+                            <li>Fraud incidence by country and merchant category.</li>
+                            <li>Transaction patterns across card providers and payment methods.</li>
+                        </ul>
+
+                        <h4>Tools used</h4>
+
+                        <div class="project-skills">
+                            <span>Power BI</span>
+                            <span>DAX</span>
+                            <span>Data Visualisation</span>
+                            <span>Fraud Analytics</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a class="project-button primary"
+                               href="images/Fintech%20Fraud%20Dashboard.jpg"
+                               target="_blank"
+                               rel="noopener noreferrer">
                                 View Dashboard Image ↗
                             </a>
                         </div>
@@ -645,32 +652,6 @@
                 </article>
 
             </div>
-        </section>
-
-        <!-- UPCOMING WORK -->
-
-        <section class="projects-section">
-            <div class="projects-section-heading">
-                <p class="section-kicker">02 / What's next</p>
-                <h2>More projects are in progress</h2>
-                <p>
-                    I'm continuing to practise and build projects that show
-                    my growth in data analytics and data science.
-                </p>
-            </div>
-
-            <article class="upcoming-card">
-                <div class="upcoming-mark">+</div>
-
-                <div>
-                    <h3>Next analytics project</h3>
-                    <p>
-                        An upcoming project focused on applying data analysis
-                        and visualisation to a new problem. Details and results
-                        will be added here when the project is ready.
-                    </p>
-                </div>
-            </article>
         </section>
 
         <!-- CONTACT -->
