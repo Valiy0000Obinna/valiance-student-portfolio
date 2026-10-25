@@ -183,6 +183,52 @@
             font-weight: 600;
         }
 
+        /* AUDIO INTRODUCTION */
+
+        .about-audio {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            align-items: center;
+            gap: 20px;
+            padding: 24px;
+            margin-bottom: 34px;
+            color: var(--about-white);
+            background: var(--about-card);
+            border: 1px solid var(--about-border);
+            border-left: 4px solid var(--about-orange);
+            border-radius: 16px;
+        }
+
+        .about-audio-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 54px;
+            height: 54px;
+            color: var(--about-lilac);
+            background: #352b49;
+            border: 1px solid #514365;
+            border-radius: 14px;
+            font-size: 1.5rem;
+        }
+
+        .about-audio-content h2 {
+            margin: 0 0 6px;
+            color: var(--about-white);
+            font-size: 1.3rem;
+        }
+
+        .about-audio-content p {
+            margin: 0 0 14px;
+            color: #e2dced;
+        }
+
+        .about-audio audio {
+            display: block;
+            width: 100%;
+            max-width: 520px;
+        }
+
         /* SECTION HEADINGS */
 
         .about-section {
@@ -436,6 +482,17 @@
                 height: 235px;
             }
 
+            .about-audio {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 12px;
+                padding: 20px;
+            }
+
+            .about-audio-icon {
+                width: 46px;
+                height: 46px;
+            }
+
             .about-section {
                 margin-top: 30px;
             }
@@ -528,6 +585,26 @@
             <div class="about-photo">
                 <img src="images/profile.jpeg"
                      alt="Portrait of Obinna Valiance Chukwuemeka">
+            </div>
+        </section>
+
+        <!-- AUDIO INTRODUCTION -->
+        <section class="about-audio" aria-labelledby="audio-intro-title">
+            <div class="about-audio-icon" aria-hidden="true">♫</div>
+
+            <div class="about-audio-content">
+                <h2 id="audio-intro-title">Hear My Introduction</h2>
+
+                <p>
+                    Get to know me, my interests, and my goals in this
+                    short audio introduction.
+                </p>
+
+                <audio controls preload="metadata">
+                    <source src="images/intro.mp3" type="audio/mpeg">
+                    Your browser does not support audio playback.
+                    You can still explore the rest of my About Me page.
+                </audio>
             </div>
         </section>
 
